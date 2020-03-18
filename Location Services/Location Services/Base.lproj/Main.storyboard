@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Delegate-->
         <scene sceneID="ABr-uX-tlh">
@@ -24,9 +29,60 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2O-2L-lVe">
                                 <rect key="frame" x="8" y="52" width="398" height="180"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-o5-yT0">
+                                        <rect key="frame" x="8" y="122" width="45" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FVx-Xz-41l"/>
+                                            <constraint firstAttribute="width" constant="45" id="zfo-gR-L1E"/>
+                                        </constraints>
+                                        <state key="normal" title="Get" image="Icon-App-83.5x83.5">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getLocation:" destination="1Yc-3S-kh8" eventType="touchUpInside" id="bnj-zX-AnA"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Services" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGF-ln-bkw">
+                                        <rect key="frame" x="99.5" y="8" width="199.5" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="yWf-x8-Xi5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the red marker to get location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Z9-nvc">
+                                        <rect key="frame" x="123.5" y="40" width="151" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="c3G-n3-amB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                        <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5or-M4-m8y">
+                                        <rect key="frame" x="61" y="132" width="329" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="adQ-CW-5zf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="7bi-5M-Pde"/>
+                                    <constraint firstItem="ibd-Z9-nvc" firstAttribute="top" secondItem="aGF-ln-bkw" secondAttribute="bottom" constant="2" id="E0b-y9-bW7"/>
+                                    <constraint firstItem="ibd-Z9-nvc" firstAttribute="centerX" secondItem="aGF-ln-bkw" secondAttribute="centerX" id="Fus-Ev-zZl"/>
+                                    <constraint firstItem="aGF-ln-bkw" firstAttribute="top" secondItem="x2O-2L-lVe" secondAttribute="top" constant="8" id="Wc4-Qz-j72"/>
+                                    <constraint firstItem="4Sd-o5-yT0" firstAttribute="centerY" secondItem="5or-M4-m8y" secondAttribute="centerY" id="XFS-DX-BTE"/>
+                                    <constraint firstItem="4Sd-o5-yT0" firstAttribute="bottom" secondItem="x2O-2L-lVe" secondAttribute="bottomMargin" id="gRO-85-x8s"/>
+                                    <constraint firstAttribute="trailing" secondItem="5or-M4-m8y" secondAttribute="trailing" constant="8" id="mcC-7V-amv"/>
+                                    <constraint firstItem="5or-M4-m8y" firstAttribute="leading" secondItem="4Sd-o5-yT0" secondAttribute="trailing" constant="8" id="oUI-zc-17L"/>
+                                    <constraint firstItem="4Sd-o5-yT0" firstAttribute="leading" secondItem="x2O-2L-lVe" secondAttribute="leadingMargin" id="t3E-md-ayw"/>
+                                    <constraint firstItem="aGF-ln-bkw" firstAttribute="centerX" secondItem="x2O-2L-lVe" secondAttribute="centerX" id="uOX-9f-UzM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -44,11 +100,15 @@
                     </view>
                     <connections>
                         <outlet property="googleMapView" destination="rvW-m4-HDZ" id="w8S-RP-9N1"/>
+                        <outlet property="latLongLabel" destination="5or-M4-m8y" id="BGc-1K-a0m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOf-co-YfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658" y="174"/>
+            <point key="canvasLocation" x="-659.4202898550725" y="173.4375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon-App-83.5x83.5" width="83.5" height="83.5"/>
+    </resources>
 </document>
