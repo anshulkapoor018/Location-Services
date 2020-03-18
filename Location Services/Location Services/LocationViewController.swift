@@ -11,8 +11,10 @@ import GoogleMaps
 import SwiftyJSON
 import CoreLocation
 import MapKit
+import NVActivityIndicatorView
+import Alamofire
 
-class LocationViewController: UIViewController, GMSMapViewDelegate {
+class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIndicatorViewable {
     
     @IBOutlet weak var latLongLabel: UILabel!
     
@@ -35,14 +37,17 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         
         marker.map = googleMapView
         googleMapView.selectedMarker = marker
+
     }
     
     @IBAction func getLocation(_ sender: UIButton) {
         self.getCurrentLocation()
+
+        startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
+        
     }
     
-    func getCurrentLocation()
-    {
+    func getCurrentLocation() {
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -52,6 +57,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
             locationManager.startUpdatingLocation()
         }
     }
+    
 }
 
 extension LocationViewController : CLLocationManagerDelegate {
@@ -59,10 +65,13 @@ extension LocationViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locationsObj = locations.last! as CLLocation
         
-//        print("Current location lat-long is = \(locationsObj.coordinate.latitude) \(locationsObj.coordinate.longitude)")
+        let locationLatitude = locationsObj.coordinate.latitude
+        let locationLongitude = locationsObj.coordinate.longitude
+        print("Current location lat-long is = \(locationLatitude) \(locationLongitude)")
+        stopAnimating()
         
-        self.detailsAndCameraPositioning(lat: locationsObj.coordinate.latitude, long: locationsObj.coordinate.longitude)
-        self.latLongLabel.text = "Lat: \(locationsObj.coordinate.latitude), Long: \(locationsObj.coordinate.longitude)"
+        self.detailsAndCameraPositioning(lat: locationLatitude, long: locationLongitude)
+        self.latLongLabel.text = "Lat: \(locationLatitude), Long: \(locationLongitude)"
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
