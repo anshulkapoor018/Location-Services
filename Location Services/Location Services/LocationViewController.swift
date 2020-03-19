@@ -16,6 +16,10 @@ import Alamofire
 
 class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIndicatorViewable {
     
+    public var latList = [Double]()
+    public var longList = [Double]()
+    public var timeList = [String]()
+    
     @IBOutlet weak var latLongLabel: UILabel!
     
     @IBOutlet weak var googleMapView: GMSMapView!
@@ -24,6 +28,8 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     override func viewDidLoad() {
         super.viewDidLoad()
         googleMapView.delegate = self
+        fetchLocationHistory()
+        
     }
     
     func detailsAndCameraPositioning(lat: Double, long: Double){
@@ -48,13 +54,30 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     }
     
     func getCurrentLocation() {
-        if (CLLocationManager.locationServicesEnabled())
-        {
+        if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func fetchLocationHistory(){
+        let request = AF.request("https://location-history-server.herokuapp.com/location")
+        
+        request.responseJSON { (response) in
+            let json = JSON(response.value!)
+            print(json)
+            for result in json.arrayValue{
+                let long = result["longitude"].doubleValue
+                let lat = result["latitude"].doubleValue
+                let timeStamp = result["timestamp"].stringValue
+                
+                self.latList.append(lat)
+                self.longList.append(long)
+                self.timeList.append(timeStamp)
+            }
         }
     }
     
