@@ -2,16 +2,18 @@
   "name": "location_server_api",
   "version": "1.0.0",
   "description": "Location Server API",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "seed": "node ./tasks/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "author": "Anshul_Kapoor",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.5.3"
+  },
+  "engines": {
+    "node": "12.14.1"
   }
 }

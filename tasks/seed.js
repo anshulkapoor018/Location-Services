@@ -9,6 +9,7 @@ const main = async () => {
 	//Creating first Location
     const Home = await location.addLocationHistory("44.4647452", "7.3553838")
     const College = await location.addLocationHistory("40.7469274", "-74.0345757")
+    const Relatives = await location.addLocationHistory("4.7469274", "-74.0345757")
 
     console.log('Done seeding database for Location Collection!');
 	await db.serverConfig.close();

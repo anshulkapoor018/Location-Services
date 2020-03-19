@@ -1,6 +1,6 @@
 {
     "mongoConfig": {
-      "serverUrl": "mongodb://localhost:27017/",
+      "serverUrl": "mongodb://django:12345A@ds113845.mlab.com:13845/location_history",
       "database": "location_history"
     }
-  }
+}
