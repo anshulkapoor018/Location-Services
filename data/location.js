@@ -2,36 +2,27 @@ const mongoCollections = require('../config/mongoCollections');
 const locations = mongoCollections.location;
 
 function currentTimestamp(){
-    // create Date object for current location
-    var d = new Date();
-
-    // convert to msec
-    // subtract local time zone offset
-    // get UTC time in msec
-    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-
-    // create new Date object for different city
-    // using supplied offset
-    var nd = new Date(utc + (3600000*offset));
-
-    let date = ("0" + nd.getDate()).slice(-2);
+    let date_ob = new Date();
+    // current date
+    // adjust 0 before single digit date
+    let date = ("0" + date_ob.getDate()).slice(-2);
 
     // current month
-    let month = ("0" + (nd.getMonth() + 1)).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 
     // current year
-    let year = nd.getFullYear();
+    let year = date_ob.getFullYear();
 
     // current hours
-    let hours = nd.getHours();
+    let hours = date_ob.getHours();
 
     // current minutes
-    let minutes = nd.getMinutes();
+    let minutes = date_ob.getMinutes();
 
     // current seconds
-    let seconds = nd.getSeconds();
+    let seconds = date_ob.getSeconds();
 
-    let timestamp = month + "-" + date + "-" + year + " " + hours + ":" + minutes + ":" + seconds
+    let timestamp = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
 
     return timestamp
 }
