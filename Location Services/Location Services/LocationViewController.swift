@@ -66,12 +66,23 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         
         let initialLocation = CLLocationCoordinate2DMake(lat, long)
         let marker = GMSMarker(position: initialLocation)
-//        marker.title = "YO"
         
         marker.map = googleMapView
         googleMapView.selectedMarker = marker
         self.latLabel.text = "Latitude: \(lat)"
         self.longLabel.text = "Longitude: \(long)"
+        let parameters: [String: Double] = [
+            "latitude" : lat,
+            "longitude" : long
+        ]
+        
+        print(parameters)
+        
+        //Posting the new geolocation via post request
+        AF.request("https://location-history-server.herokuapp.com/location", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        .responseJSON { response in
+            print(response)
+        }
     }
     
     func detailsAndCameraPositioning(index: Int){
@@ -120,7 +131,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         
         request.responseJSON { (response) in
             let json = JSON(response.value!)
-//            print(json)
+
             for result in json.arrayValue{
                 let long = result["longitude"].doubleValue
                 let lat = result["latitude"].doubleValue
@@ -132,7 +143,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             }
         }
     }
-    
 }
 
 extension LocationViewController : CLLocationManagerDelegate {
@@ -142,7 +152,7 @@ extension LocationViewController : CLLocationManagerDelegate {
         
         let locationLatitude = locationsObj.coordinate.latitude
         let locationLongitude = locationsObj.coordinate.longitude
-        print("Current location lat-long is = \(locationLatitude) \(locationLongitude)")
+//        print("Current location lat-long is = \(locationLatitude) \(locationLongitude)")
         stopAnimating()
         
         self.locateMe(lat: locationLatitude, long: locationLongitude)
