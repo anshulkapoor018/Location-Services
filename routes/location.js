@@ -31,7 +31,7 @@ router.get("/limit/5", async (req, res) => {
     res.status(404).send();
   }
 });
-// https://location-history-server.herokuapp.com/location/date/2010-03-12/2020-03-13
+
 router.get("/date/:startDate/:endDate", async (req, res) => {
   try {
     const locationList = await location.getLocationHistoryInRange(req.params.startDate, req.params.endDate);

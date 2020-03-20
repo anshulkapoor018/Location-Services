@@ -86,7 +86,7 @@ async function getLocationHistoryLimited(){
 async function getLocationHistoryInRange(startingDate, endingDate){
     const locationCollection = await locations();
     
-    const locationsData = await locationCollection.find({ 'dateOfVisit': {$gte : startingDate, $lte: endingDate}}).toArray();
+    const locationsData = await locationCollection.find({ 'dateOfVisit': {$gte : startingDate, $lte: endingDate}}).sort({ 'timestamp': -1 }).toArray();
 
     return locationsData;
 }
