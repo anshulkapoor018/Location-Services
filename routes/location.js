@@ -5,8 +5,8 @@ const location = data.location;
 
 router.get("/:id", async (req, res) => {
   try {
-    const band = await location.getLocationHistory(req.params.id);
-    res.status(200).json(band);
+    const locationData = await location.getLocationHistory(req.params.id);
+    res.status(200).json(locationData);
   } catch (e) {
     res.status(404).json({ message: "location not found!" });
   }
@@ -14,8 +14,18 @@ router.get("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const bandList = await location.getAllLocationHistory();
-    res.status(200).json(bandList);
+    const locationList = await location.getAllLocationHistory();
+    res.status(200).json(locationList);
+  } catch (e) {
+    // Something went wrong with the server!
+    res.status(404).send();
+  }
+});
+
+router.get("/limit/5", async (req, res) => {
+  try {
+    const locationList = await location.getLocationHistoryLimited();
+    res.status(200).json(locationList);
   } catch (e) {
     // Something went wrong with the server!
     res.status(404).send();

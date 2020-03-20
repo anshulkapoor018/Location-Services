@@ -92,7 +92,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="selectLocationHistory:" destination="1Yc-3S-kh8" eventType="editingDidBegin" id="dAw-dZ-31F"/>
                                             <outlet property="delegate" destination="1Yc-3S-kh8" id="sWS-5O-ee5"/>
                                         </connections>
                                     </textField>

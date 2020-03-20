@@ -103,8 +103,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     @IBAction func getLocationHistory(_ sender: Any) {
         fetchLocationHistory()
     }
-    @IBAction func selectLocationHistory(_ sender: Any) {
-    }
     
     @IBAction func getLocation(_ sender: UIButton) {
         self.getCurrentLocation()

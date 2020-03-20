@@ -52,7 +52,15 @@ async function addLocationHistory(latitude, longitude) {
 async function getAllLocationHistory() {
     const locationCollection = await locations();
 
-    const locationsData = await locationCollection.find({}).toArray();
+    const locationsData = await locationCollection.find({}).sort({ 'timestamp': -1 }).toArray();
+
+    return locationsData;
+}
+
+async function getLocationHistoryLimited(){
+    const locationCollection = await locations();
+    
+    const locationsData = await locationCollection.find({}).sort({ 'timestamp': -1 }).limit(5).toArray();
 
     return locationsData;
 }
@@ -117,6 +125,7 @@ module.exports = {
     addLocationHistory,
     getAllLocationHistory, 
     getLocationHistory, 
+    getLocationHistoryLimited,
     updateLocationHistory,
     removeLocationHistory
 }
