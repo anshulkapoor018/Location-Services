@@ -32,6 +32,16 @@ router.get("/limit/5", async (req, res) => {
   }
 });
 
+router.get("/date/:startDate/:endDate", async (req, res) => {
+  try {
+    const locationList = await location.getLocationHistoryInRange(req.params.startDate, req.params.endDate);
+    res.status(200).json(locationList);
+  } catch (e) {
+    // Something went wrong with the server!
+    res.status(404).send();
+  }
+});
+
 router.post('/', async (req, res) => {
 	const locationData = req.body;
 	if (!locationData.latitude) {

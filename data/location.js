@@ -27,6 +27,23 @@ function currentTimestamp(){
     return timestamp
 }
 
+function currentDateStamp(){
+    let date_ob = new Date();
+    // current date
+    // adjust 0 before single digit date
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    // current year
+    let year = date_ob.getFullYear();
+
+    let dateStamp = year + "-" + month + "-" + date
+
+    return dateStamp
+}
+
 async function addLocationHistory(latitude, longitude) {
     const locationCollection = await locations();
 
@@ -37,7 +54,8 @@ async function addLocationHistory(latitude, longitude) {
     let newLocation = {
         latitude: latitude,
         longitude: longitude,
-        timestamp: currentTimestamp()
+        timestamp: currentTimestamp(),
+        dateOfVisit: currentDateStamp()
     };
 
     const insertInfo = await locationCollection.insertOne(newLocation);
@@ -61,6 +79,14 @@ async function getLocationHistoryLimited(){
     const locationCollection = await locations();
     
     const locationsData = await locationCollection.find({}).sort({ 'timestamp': -1 }).limit(5).toArray();
+
+    return locationsData;
+}
+
+async function getLocationHistoryInRange(startingDate, endingDate){
+    const locationCollection = await locations();
+    
+    const locationsData = await locationCollection.find({ 'dateOfVisit': {$gte : startingDate, $lte: endingDate}}).toArray();
 
     return locationsData;
 }
@@ -92,7 +118,8 @@ async function updateLocationHistory(locationId, latitude, longitude) {
     const updatedLocation = {
         latitude: latitude,
         longitude: longitude,
-        timestamp: currentTimestamp()
+        timestamp: currentTimestamp(),
+        dateOfVisit: currentDateStamp()
     };
 
     const updatedInfo = await locationCollection.updateOne({_id: objId}, {$set: updatedLocation});
@@ -126,6 +153,7 @@ module.exports = {
     getAllLocationHistory, 
     getLocationHistory, 
     getLocationHistoryLimited,
+    getLocationHistoryInRange,
     updateLocationHistory,
     removeLocationHistory
 }
