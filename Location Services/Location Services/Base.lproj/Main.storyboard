@@ -56,13 +56,16 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rwv-EL-ynU">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="yyyy-mm-dd" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rwv-EL-ynU">
                                                         <rect key="frame" x="99.5" y="0.0" width="120" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="120" id="6ou-yk-24e"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="1Yc-3S-kh8" id="xxi-dR-eDv"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -75,13 +78,16 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xvt-Vz-rNy">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="yyyy-mm-dd" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xvt-Vz-rNy">
                                                         <rect key="frame" x="99.5" y="0.0" width="120" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="120" id="Wvi-0H-E1t"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="1Yc-3S-kh8" id="xZx-lv-59n"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>

@@ -28,15 +28,40 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @IBOutlet weak var googleMapView: GMSMapView!
     
-    @IBOutlet weak var startDateField: UITextField!
+    @IBOutlet weak var startDateField: disableUITextField!
     
-    @IBOutlet weak var endDateField: UITextField!
+    @IBOutlet weak var endDateField: disableUITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         googleMapView.delegate = self
         fetchLocationHistory(url: apiURL)
         createPickerView()
         dismissPickerView()
+        // First Textfield
+        let startDatePickerView = UIDatePicker()
+        startDatePickerView.datePickerMode = .date
+        startDateField.inputView = startDatePickerView
+        startDatePickerView.addTarget(self, action: #selector(starthandleDatePicker), for: .valueChanged)
+        
+        // Second TextField
+        let endDatePickerView = UIDatePicker()
+        endDatePickerView.datePickerMode = .date
+        endDateField.inputView = endDatePickerView
+        endDatePickerView.addTarget(self, action: #selector(endhandleDatePicker), for: .valueChanged)
+        
+    }
+    
+    @objc func starthandleDatePicker(sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        startDateField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    @objc func endhandleDatePicker(sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        endDateField.text = dateFormatter.string(from: sender.date)
     }
     
     func createPickerView() {
@@ -57,6 +82,10 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @objc func action() {
        view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     func locateMe(lat: Double, long: Double){
@@ -155,11 +184,10 @@ extension LocationViewController : CLLocationManagerDelegate {
         
         let locationLatitude = locationsObj.coordinate.latitude
         let locationLongitude = locationsObj.coordinate.longitude
-//        print("Current location lat-long is = \(locationLatitude) \(locationLongitude)")
+
         stopAnimating()
         
         self.locateMe(lat: locationLatitude, long: locationLongitude)
-
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
