@@ -15,6 +15,10 @@
 		D81886682421BE9F006A5114 /* Location_Services.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D81886662421BE9F006A5114 /* Location_Services.xcdatamodeld */; };
 		D818866A2421BEA2006A5114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D81886692421BEA2006A5114 /* Assets.xcassets */; };
 		D818866D2421BEA2006A5114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D818866B2421BEA2006A5114 /* LaunchScreen.storyboard */; };
+		D8A67F9E2425828E004FDB64 /* myView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A67F9A2425828E004FDB64 /* myView.swift */; };
+		D8A67F9F2425828E004FDB64 /* Toast.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8A67F9B2425828E004FDB64 /* Toast.xib */; };
+		D8A67FA02425828E004FDB64 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A67F9C2425828E004FDB64 /* ToastView.swift */; };
+		D8A67FA12425828E004FDB64 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A67F9D2425828E004FDB64 /* Toast.swift */; };
 		D8B6F95624231FEA0010AFA2 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6F95524231FEA0010AFA2 /* ViewUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,10 @@
 		D81886692421BEA2006A5114 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D818866C2421BEA2006A5114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D818866E2421BEA2006A5114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8A67F9A2425828E004FDB64 /* myView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myView.swift; sourceTree = "<group>"; };
+		D8A67F9B2425828E004FDB64 /* Toast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Toast.xib; sourceTree = "<group>"; };
+		D8A67F9C2425828E004FDB64 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		D8A67F9D2425828E004FDB64 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		D8B6F95524231FEA0010AFA2 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +92,7 @@
 		D818865C2421BE9F006A5114 /* Location Services */ = {
 			isa = PBXGroup;
 			children = (
+				D8A67F992425826C004FDB64 /* ToastClass */,
 				D818865D2421BE9F006A5114 /* AppDelegate.swift */,
 				D818865F2421BE9F006A5114 /* SceneDelegate.swift */,
 				D81886612421BE9F006A5114 /* LocationViewController.swift */,
@@ -95,6 +104,17 @@
 				D8B6F95524231FEA0010AFA2 /* ViewUtils.swift */,
 			);
 			path = "Location Services";
+			sourceTree = "<group>";
+		};
+		D8A67F992425826C004FDB64 /* ToastClass */ = {
+			isa = PBXGroup;
+			children = (
+				D8A67F9A2425828E004FDB64 /* myView.swift */,
+				D8A67F9D2425828E004FDB64 /* Toast.swift */,
+				D8A67F9B2425828E004FDB64 /* Toast.xib */,
+				D8A67F9C2425828E004FDB64 /* ToastView.swift */,
+			);
+			path = ToastClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D818866D2421BEA2006A5114 /* LaunchScreen.storyboard in Resources */,
+				D8A67F9F2425828E004FDB64 /* Toast.xib in Resources */,
 				D818866A2421BEA2006A5114 /* Assets.xcassets in Resources */,
 				D81886652421BE9F006A5114 /* Main.storyboard in Resources */,
 			);
@@ -231,9 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81886622421BE9F006A5114 /* LocationViewController.swift in Sources */,
+				D8A67FA12425828E004FDB64 /* Toast.swift in Sources */,
+				D8A67FA02425828E004FDB64 /* ToastView.swift in Sources */,
 				D8B6F95624231FEA0010AFA2 /* ViewUtils.swift in Sources */,
 				D818865E2421BE9F006A5114 /* AppDelegate.swift in Sources */,
 				D81886682421BE9F006A5114 /* Location_Services.xcdatamodeld in Sources */,
+				D8A67F9E2425828E004FDB64 /* myView.swift in Sources */,
 				D81886602421BE9F006A5114 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

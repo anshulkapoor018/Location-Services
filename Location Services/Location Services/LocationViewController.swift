@@ -32,6 +32,48 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @IBOutlet weak var endDateField: disableUITextField!
     
+    @IBAction func getLocationHistory(_ sender: Any) {
+        fetchLocationHistory(url: apiURL)
+    }
+    
+    @IBAction func getLocation(_ sender: UIButton) {
+        self.getCurrentLocation()
+
+        startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
+    }
+    
+    @IBAction func getLast5(_ sender: UIButton) {
+        let lastFiveLocationURL = apiURL + "/limit/5"
+        fetchLocationHistory(url: lastFiveLocationURL)
+    }
+    
+    @IBAction func getDateRangeLocations(_ sender: UIButton) {
+        if(startDateField.text! == "" && endDateField.text! != ""){
+            Toast.short(message: "Please pick a start Date", success: "1", failer: "0")
+        } else if(startDateField.text! != "" && endDateField.text! == ""){
+            Toast.short(message: "Please pick an end Date", success: "1", failer: "0")
+        } else if(startDateField.text! == "" || endDateField.text! == ""){
+            Toast.short(message: "Please pick both the Dates", success: "1", failer: "0")
+        } else if(startDateField.text! != "" || endDateField.text! != ""){
+            print(startDateField.text!)
+            print(endDateField.text!)
+            
+            //Reference date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let startDateObject = dateFormatter.date(from: startDateField.text!)!
+            let currentDateObject = Date()
+            
+            if(startDateObject > currentDateObject){
+                Toast.short(message: "Start Date can't be in future!", success: "1", failer: "0")
+            } else {
+                let dateRangeApiEndpoint = apiURL + "/date/" + startDateField.text! + "/" + endDateField.text!
+
+                fetchLocationHistory(url: dateRangeApiEndpoint)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         googleMapView.delegate = self
@@ -125,26 +167,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         googleMapView.selectedMarker = marker
     }
     
-    @IBAction func getLocationHistory(_ sender: Any) {
-        fetchLocationHistory(url: apiURL)
-    }
-    
-    @IBAction func getLocation(_ sender: UIButton) {
-        self.getCurrentLocation()
-
-        startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
-        
-    }
-    
-    @IBAction func getLast5(_ sender: UIButton) {
-        let lastFiveLocationURL = apiURL + "/limit/5"
-        fetchLocationHistory(url: lastFiveLocationURL)
-    }
-    
-    @IBAction func getDateRangeLocations(_ sender: UIButton) {
-    
-    }
-    
     func getCurrentLocation() {
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -174,6 +196,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
                 self.timeList.append(timeStamp)
             }
         }
+        Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
     }
 }
 

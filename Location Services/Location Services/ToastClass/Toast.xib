@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TrebuchetMSBold.ttf">
+            <string>TrebuchetMS-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="kGs-pS-cmW" customClass="ToastView" customModule="visioniosapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a28-eG-UrG" customClass="MyView" customModule="visioniosapp" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ve9-8C-GTW">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSW-RE-cAv">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ve9-8C-GTW" secondAttribute="bottom" id="2My-c5-P0n"/>
+                        <constraint firstItem="ve9-8C-GTW" firstAttribute="leading" secondItem="a28-eG-UrG" secondAttribute="leading" id="HkY-qM-6Ae"/>
+                        <constraint firstItem="FSW-RE-cAv" firstAttribute="leading" secondItem="a28-eG-UrG" secondAttribute="leading" id="NTR-Mx-eMP"/>
+                        <constraint firstItem="ve9-8C-GTW" firstAttribute="top" secondItem="a28-eG-UrG" secondAttribute="top" id="VwS-LG-10i"/>
+                        <constraint firstAttribute="trailing" secondItem="ve9-8C-GTW" secondAttribute="trailing" id="dZD-Wh-McV"/>
+                        <constraint firstAttribute="width" constant="300" id="dcP-xY-NNR"/>
+                        <constraint firstAttribute="height" constant="40" id="dsh-2S-Zyf"/>
+                        <constraint firstAttribute="trailing" secondItem="FSW-RE-cAv" secondAttribute="trailing" id="l8b-W5-KfI"/>
+                        <constraint firstAttribute="bottom" secondItem="FSW-RE-cAv" secondAttribute="bottom" id="vmb-9S-fty"/>
+                        <constraint firstItem="FSW-RE-cAv" firstAttribute="top" secondItem="a28-eG-UrG" secondAttribute="top" id="w6G-Lz-zQQ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="a28-eG-UrG" firstAttribute="top" secondItem="kGs-pS-cmW" secondAttribute="top" id="2ig-Tq-hGC"/>
+                <constraint firstItem="a28-eG-UrG" firstAttribute="leading" secondItem="kGs-pS-cmW" secondAttribute="leading" id="VAn-pv-2Bv"/>
+            </constraints>
+            <connections>
+                <outlet property="imageV" destination="ve9-8C-GTW" id="N0a-jE-eO2"/>
+                <outlet property="left" destination="VAn-pv-2Bv" id="DHZ-kV-8WB"/>
+                <outlet property="title" destination="FSW-RE-cAv" id="11J-J4-RMa"/>
+                <outlet property="top" destination="2ig-Tq-hGC" id="EJn-2S-fD5"/>
+                <outlet property="view" destination="a28-eG-UrG" id="ofN-Tf-grb"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+    </objects>
+</document>
