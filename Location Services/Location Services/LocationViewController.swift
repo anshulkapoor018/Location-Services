@@ -16,6 +16,7 @@ import Alamofire
 
 class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIndicatorViewable {
     
+    public var apiURL = "https://location-history-server.herokuapp.com/location"
     public var latList = [Double]()
     public var longList = [Double]()
     public var timeList = [String]()
@@ -25,17 +26,15 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @IBOutlet weak var selectLocation: disableUITextField!
     
-    @IBOutlet weak var latLabel: UILabel!
-    
-    @IBOutlet weak var longLabel: UILabel!
-    
     @IBOutlet weak var googleMapView: GMSMapView!
     
+    @IBOutlet weak var startDateField: UITextField!
     
+    @IBOutlet weak var endDateField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         googleMapView.delegate = self
-        fetchLocationHistory()
+        fetchLocationHistory(url: apiURL)
         createPickerView()
         dismissPickerView()
     }
@@ -68,9 +67,8 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         let marker = GMSMarker(position: initialLocation)
         
         marker.map = googleMapView
+        marker.title = "\(lat), \(long)"
         googleMapView.selectedMarker = marker
-        self.latLabel.text = "Latitude: \(lat)"
-        self.longLabel.text = "Longitude: \(long)"
         let parameters: [String: Double] = [
             "latitude" : lat,
             "longitude" : long
@@ -92,16 +90,14 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         
         let initialLocation = CLLocationCoordinate2DMake(latList[index], longList[index])
         let marker = GMSMarker(position: initialLocation)
-//        marker.title = "YO"
-        
+
+        marker.title = "\(latList[index]), \(longList[index])"
         marker.map = googleMapView
         googleMapView.selectedMarker = marker
-        self.latLabel.text = "Latitude: \(latList[index])"
-        self.longLabel.text = "Longitude: \(longList[index])"
     }
     
     @IBAction func getLocationHistory(_ sender: Any) {
-        fetchLocationHistory()
+        fetchLocationHistory(url: apiURL)
     }
     
     @IBAction func getLocation(_ sender: UIButton) {
@@ -109,6 +105,15 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
 
         startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
         
+    }
+    
+    @IBAction func getLast5(_ sender: UIButton) {
+        let lastFiveLocationURL = apiURL + "/limit/5"
+        fetchLocationHistory(url: lastFiveLocationURL)
+    }
+    
+    @IBAction func getDateRangeLocations(_ sender: UIButton) {
+    
     }
     
     func getCurrentLocation() {
@@ -121,11 +126,11 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
-    func fetchLocationHistory(){
+    func fetchLocationHistory(url: String){
         self.latList = []
         self.longList = []
         self.timeList = []
-        let request = AF.request("https://location-history-server.herokuapp.com/location")
+        let request = AF.request(url)
         
         request.responseJSON { (response) in
             let json = JSON(response.value!)

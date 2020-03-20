@@ -84,7 +84,6 @@
 		D818865C2421BE9F006A5114 /* Location Services */ = {
 			isa = PBXGroup;
 			children = (
-				D8B6F95424230D4B0010AFA2 /* Model */,
 				D818865D2421BE9F006A5114 /* AppDelegate.swift */,
 				D818865F2421BE9F006A5114 /* SceneDelegate.swift */,
 				D81886612421BE9F006A5114 /* LocationViewController.swift */,
@@ -96,13 +95,6 @@
 				D8B6F95524231FEA0010AFA2 /* ViewUtils.swift */,
 			);
 			path = "Location Services";
-			sourceTree = "<group>";
-		};
-		D8B6F95424230D4B0010AFA2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
