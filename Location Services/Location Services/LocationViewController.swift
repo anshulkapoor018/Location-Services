@@ -154,6 +154,22 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
+    func convertDateToHumanReadable(date: String) -> String {
+        if(date == "" || date.isEmpty || date == "None"){
+            return ""
+        } else{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //Your date format
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT-9") //Current time zone
+            let date = dateFormatter.date(from: date) //according to date format your date string
+            //print(date ?? "")
+            dateFormatter.dateFormat = "dd MMMM, yyyy HH:mm:ss" //Your New Date format as per requirement change it own
+            let newDate = dateFormatter.string(from: date!) //pass Date here
+            //print(newDate)
+            return newDate
+        }
+    }
+    
     func detailsAndCameraPositioning(index: Int){
         
         let camera = GMSCameraPosition.camera(withLatitude: latList[index], longitude: longList[index], zoom: 17)
@@ -182,7 +198,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         self.longList = []
         self.timeList = []
         let request = AF.request(url)
-        
+        var index = 1
         request.responseJSON { (response) in
             let json = JSON(response.value!)
 
@@ -193,7 +209,8 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
                 
                 self.latList.append(lat)
                 self.longList.append(long)
-                self.timeList.append(timeStamp)
+                self.timeList.append("\(index)" + ". " + self.convertDateToHumanReadable(date: timeStamp))
+                index = index + 1
             }
         }
         Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
