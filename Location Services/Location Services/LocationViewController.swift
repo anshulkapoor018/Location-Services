@@ -150,12 +150,13 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     }
     
     func locateMe(lat: Double, long: Double){
+        self.googleMapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17)
         self.googleMapView.camera = camera
         
         let initialLocation = CLLocationCoordinate2DMake(lat, long)
         let marker = GMSMarker(position: initialLocation)
-        
+        marker.map = nil
         marker.map = googleMapView
         marker.title = "\(lat), \(long)"
         googleMapView.selectedMarker = marker
@@ -191,6 +192,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     }
     
     func detailsAndCameraPositioning(index: Int){
+        self.googleMapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: latList[index], longitude: longList[index], zoom: 17)
         self.googleMapView.camera = camera
         
@@ -206,7 +208,8 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.distanceFilter = 200
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         }
@@ -240,6 +243,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
 extension LocationViewController : CLLocationManagerDelegate {
     // MARK: Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
         let locationsObj = locations.last! as CLLocation
         
         let locationLatitude = locationsObj.coordinate.latitude
