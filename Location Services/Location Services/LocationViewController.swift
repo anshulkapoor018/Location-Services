@@ -160,10 +160,11 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         } else{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //Your date format
-            dateFormatter.timeZone = TimeZone(abbreviation: "GMT-9") //Current time zone
+            dateFormatter.timeZone = TimeZone(abbreviation: "UTC") //Current time zone
             let date = dateFormatter.date(from: date) //according to date format your date string
             //print(date ?? "")
             dateFormatter.dateFormat = "dd MMMM, yyyy HH:mm:ss" //Your New Date format as per requirement change it own
+            dateFormatter.timeZone = TimeZone.current
             let newDate = dateFormatter.string(from: date!) //pass Date here
             //print(newDate)
             return newDate
