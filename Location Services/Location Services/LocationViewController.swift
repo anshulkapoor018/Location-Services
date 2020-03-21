@@ -62,10 +62,13 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let startDateObject = dateFormatter.date(from: startDateField.text!)!
+            let endDateObject = dateFormatter.date(from: endDateField.text!)!
             let currentDateObject = Date()
             
             if(startDateObject > currentDateObject){
                 Toast.short(message: "Start Date can't be in future!", success: "1", failer: "0")
+            } else if(startDateObject > endDateObject){
+                Toast.short(message: "Start Date can't be greater than End Date!", success: "1", failer: "0")
             } else {
                 let dateRangeApiEndpoint = apiURL + "/date/" + startDateField.text! + "/" + endDateField.text!
 
@@ -162,17 +165,16 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //Your date format
             dateFormatter.timeZone = TimeZone(abbreviation: "UTC") //Current time zone
             let date = dateFormatter.date(from: date) //according to date format your date string
-            //print(date ?? "")
-            dateFormatter.dateFormat = "dd MMMM, yyyy HH:mm:ss" //Your New Date format as per requirement change it own
+            
+            dateFormatter.dateFormat = "dd MMMM, yyyy HH:mm:ss" //New Date Format
             dateFormatter.timeZone = TimeZone.current
             let newDate = dateFormatter.string(from: date!) //pass Date here
-            //print(newDate)
+            
             return newDate
         }
     }
     
     func detailsAndCameraPositioning(index: Int){
-        
         let camera = GMSCameraPosition.camera(withLatitude: latList[index], longitude: longList[index], zoom: 17)
         self.googleMapView.camera = camera
         
