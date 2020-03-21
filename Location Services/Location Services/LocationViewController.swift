@@ -20,6 +20,8 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     public var latList = [Double]()
     public var longList = [Double]()
     public var timeList = [String]()
+    public var currentLocationLat = String()
+    public var currentLocationLong = String()
     var locationManager: CLLocationManager!
     public var selectedCentre : Int = 0
     let centrePicker = UIPickerView()
@@ -34,6 +36,19 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @IBAction func getLocationHistory(_ sender: Any) {
         fetchLocationHistory(url: apiURL)
+    }
+    
+    @IBAction func shareLocation(_ sender: UIButton) {
+        if(currentLocationLong == "" || currentLocationLat == ""){
+            Toast.short(message: "Please Press Get Location to fetch Current Location", success: "1", failer: "0")
+        } else{
+            let googleMapLink = "http://www.google.com/maps/place/" + currentLocationLat + "," + currentLocationLong
+            print(googleMapLink)
+            let textShare = [ googleMapLink ]
+            let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func getLocation(_ sender: UIButton) {
@@ -79,6 +94,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
         googleMapView.delegate = self
         fetchLocationHistory(url: apiURL)
         createPickerView()
@@ -217,6 +233,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             }
         }
         Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
+        stopAnimating()
     }
 }
 
@@ -227,6 +244,9 @@ extension LocationViewController : CLLocationManagerDelegate {
         
         let locationLatitude = locationsObj.coordinate.latitude
         let locationLongitude = locationsObj.coordinate.longitude
+        
+        self.currentLocationLat = locationLatitude.string
+        self.currentLocationLong = locationLongitude.string
 
         stopAnimating()
         
@@ -278,4 +298,8 @@ extension LocationViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return false
     }
+}
+
+extension LosslessStringConvertible {
+    var string: String { .init(self) }
 }

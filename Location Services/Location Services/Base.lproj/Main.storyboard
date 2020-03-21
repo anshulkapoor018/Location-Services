@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Delegate-->
         <scene sceneID="ABr-uX-tlh">
@@ -129,37 +134,49 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-o5-yT0">
-                                        <rect key="frame" x="118.5" y="214" width="169" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="QeC-ur-8yV"/>
-                                        </constraints>
-                                        <state key="normal" title="Get Current Location">
-                                            <color key="titleColor" red="0.74387127159999999" green="0.2285113335" blue="0.17362964149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="getLocation:" destination="1Yc-3S-kh8" eventType="touchUpInside" id="bnj-zX-AnA"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qA6-Ib-5vM">
+                                        <rect key="frame" x="12" y="214" width="382" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-o5-yT0">
+                                                <rect key="frame" x="0.0" y="0.0" width="183" height="34"/>
+                                                <state key="normal" title="Get Current Location">
+                                                    <color key="titleColor" red="0.74387127159999999" green="0.2285113335" blue="0.17362964149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="getLocation:" destination="1Yc-3S-kh8" eventType="touchUpInside" id="bnj-zX-AnA"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh7-JP-d3R">
+                                                <rect key="frame" x="199" y="0.0" width="183" height="34"/>
+                                                <state key="normal" title="Share Location">
+                                                    <color key="titleColor" red="0.74387127159999999" green="0.2285113335" blue="0.17362964149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareLocation:" destination="1Yc-3S-kh8" eventType="touchUpInside" id="hfx-xn-wE0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="kSW-gi-oWl" firstAttribute="leading" secondItem="x2O-2L-lVe" secondAttribute="leading" constant="12" id="1s1-eo-eST"/>
                                     <constraint firstAttribute="height" constant="256" id="7bi-5M-Pde"/>
-                                    <constraint firstItem="4Sd-o5-yT0" firstAttribute="top" secondItem="ohi-Xa-FhR" secondAttribute="bottom" constant="12" id="8jj-MV-8Wg"/>
-                                    <constraint firstAttribute="bottom" secondItem="4Sd-o5-yT0" secondAttribute="bottom" constant="8" id="EMs-HJ-gOg"/>
                                     <constraint firstItem="dUl-cF-rjW" firstAttribute="centerY" secondItem="Kce-ng-604" secondAttribute="centerY" id="GsD-d0-Fh5"/>
                                     <constraint firstItem="dUl-cF-rjW" firstAttribute="top" secondItem="ox2-Km-f8Y" secondAttribute="bottom" constant="31" id="JPg-ef-Fd3"/>
+                                    <constraint firstItem="qA6-Ib-5vM" firstAttribute="top" secondItem="ohi-Xa-FhR" secondAttribute="bottom" constant="12" id="O0x-eK-h7Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="qA6-Ib-5vM" secondAttribute="bottom" constant="8" id="PB5-eI-hQt"/>
                                     <constraint firstItem="Kce-ng-604" firstAttribute="leading" secondItem="x2O-2L-lVe" secondAttribute="leading" constant="12" id="QHu-y6-taP"/>
-                                    <constraint firstItem="4Sd-o5-yT0" firstAttribute="centerX" secondItem="ohi-Xa-FhR" secondAttribute="centerX" id="TGO-ZZ-mM3"/>
                                     <constraint firstItem="aGF-ln-bkw" firstAttribute="top" secondItem="x2O-2L-lVe" secondAttribute="top" constant="8" id="Wc4-Qz-j72"/>
                                     <constraint firstItem="ohi-Xa-FhR" firstAttribute="leading" secondItem="x2O-2L-lVe" secondAttribute="leading" constant="12" id="hsS-gd-3QE"/>
                                     <constraint firstItem="kSW-gi-oWl" firstAttribute="top" secondItem="aGF-ln-bkw" secondAttribute="bottom" constant="4" id="mbN-Ah-WfZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ohi-Xa-FhR" secondAttribute="trailing" constant="12" id="obs-Q1-po6"/>
                                     <constraint firstItem="dUl-cF-rjW" firstAttribute="trailing" secondItem="ox2-Km-f8Y" secondAttribute="trailing" id="pV3-Wj-MsH"/>
                                     <constraint firstAttribute="trailing" secondItem="ox2-Km-f8Y" secondAttribute="trailing" constant="12" id="qKQ-3a-R8A"/>
+                                    <constraint firstAttribute="trailing" secondItem="qA6-Ib-5vM" secondAttribute="trailing" constant="12" id="sCX-z6-jXZ"/>
                                     <constraint firstItem="aGF-ln-bkw" firstAttribute="centerX" secondItem="x2O-2L-lVe" secondAttribute="centerX" id="uOX-9f-UzM"/>
                                     <constraint firstItem="ox2-Km-f8Y" firstAttribute="top" secondItem="aGF-ln-bkw" secondAttribute="bottom" constant="4" id="vGs-fs-Da2"/>
+                                    <constraint firstItem="qA6-Ib-5vM" firstAttribute="leading" secondItem="x2O-2L-lVe" secondAttribute="leading" constant="12" id="zN5-n4-MOo"/>
                                 </constraints>
                             </view>
                         </subviews>
