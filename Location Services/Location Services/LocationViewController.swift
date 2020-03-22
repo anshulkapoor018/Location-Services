@@ -171,6 +171,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         AF.request("https://location-history-server.herokuapp.com/location", method: .post, parameters: parameters, encoding: JSONEncoding.default)
         .responseJSON { response in
             print(response)
+            self.fetchLocationHistory(url: self.apiURL)
         }
     }
     
@@ -183,7 +184,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             dateFormatter.timeZone = TimeZone(abbreviation: "UTC") //Current time zone
             let date = dateFormatter.date(from: date) //according to date format your date string
             
-            dateFormatter.dateFormat = "dd MMMM, yyyy HH:mm:ss" //New Date Format
+            dateFormatter.dateFormat = "MMMM dd, yyyy - HH:mm:ss" //New Date Format
             dateFormatter.timeZone = TimeZone.current
             let newDate = dateFormatter.string(from: date!) //pass Date here
             
@@ -211,7 +212,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             locationManager.distanceFilter = 200
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestAlwaysAuthorization()
-            locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
         }
     }
     
@@ -243,22 +244,24 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
 extension LocationViewController : CLLocationManagerDelegate {
     // MARK: Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
-        let locationsObj = locations.last! as CLLocation
-        
-        let locationLatitude = locationsObj.coordinate.latitude
-        let locationLongitude = locationsObj.coordinate.longitude
-        
-        self.currentLocationLat = locationLatitude.string
-        self.currentLocationLong = locationLongitude.string
+        if let location = locations.first {
+            print("Found user's location: \(location)")
+            let locationsObj = locations.last! as CLLocation
+            
+            let locationLatitude = locationsObj.coordinate.latitude
+            let locationLongitude = locationsObj.coordinate.longitude
+            
+            self.currentLocationLat = locationLatitude.string
+            self.currentLocationLong = locationLongitude.string
 
-        stopAnimating()
-        
-        self.locateMe(lat: locationLatitude, long: locationLongitude)
+            stopAnimating()
+            
+            self.locateMe(lat: locationLatitude, long: locationLongitude)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Get Location failed")
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
 
     func showOnMap(location: CLLocation) {
