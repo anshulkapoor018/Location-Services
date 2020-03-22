@@ -2,6 +2,10 @@
 
 iOS Application Backed by a NodeJS Server Hosted on Heroku with the Cloud Database Service mLAB for MongoDB
 
+### Main Screen 
+![alt text](https://github.com/anshulkapoor018/Location-Services/blob/master/Screenshots/Main%20Screen.png)
+
+
 Configure the Team for each target within the project.
 
     1.Open the project in the Project navigator within Xcode and select each of the targets. Set the Team on the General tab to the team associated with your developer account.
