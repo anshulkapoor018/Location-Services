@@ -35,8 +35,14 @@ Share location with your friends list - **Implemented using uiactivityviewcontro
     2.Change the Bundle Identifier.
         * With the project's General tab still open, update the Bundle Identifier value. The project's Lister target ships with the value: com.example.<Insert_Name_here>.Location-Services
         * You should modify the reverse DNS portion to match the format that you use:
-    com.anshulkapoor018.Location-Services <This needs to be edited>
+            -> com.anshulkapoor018.Location-Services <This needs to be edited>
+    3.Install Supporting Libraries
+        * First, make sure you have Cocoapods installed. If not, Run the command below
+            -> `sudo gem install cocoapods`
+        * Second, navigate to ../Location-Services/Location Services Folder via Terminal and Run the Below command
+            -> `pod install`
 
+##### Open the Project workspace File(_Location Services.xcworkspace_) for Testing the Application
 
 This application is written in Swift.
 Location-Services design and controller interactions are implemented in a Storyboard. A storyboard makes it easy to visualize the relationships between view controllers and to lay out the user interface of the app. Location-Services also takes advantage of Auto Layout to fluidly resize the interface as the user resizes the window. If you're opening the project for the first time, the Main.storyboard file is a good place to understand how the app works.
