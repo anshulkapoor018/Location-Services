@@ -36,9 +36,9 @@ Share location with your friends list - **Implemented using uiactivityviewcontro
     2. You should modify the reverse DNS portion to match the format that you use: com.anshulkapoor018.Location-Services <This needs to be edited>
 3. Install Supporting Libraries
     1. First, make sure you have Cocoapods installed. If not, Run the command below
-    `sudo gem install cocoapods`
+        1. `sudo gem install cocoapods`
     2. Second, navigate to ../Location-Services/Location Services Folder via Terminal and Run the Below command
-    `pod install`
+        1. `pod install`
 
 ##### Open the Project workspace File(_Location Services.xcworkspace_) for Testing the Application
 

@@ -58,9 +58,10 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     }
     
     @IBAction func getLast5(_ sender: UIButton) {
+        startAnimating(CGSize(width: 50, height: 30), message: "Fetching...", type: NVActivityIndicatorType.ballSpinFadeLoader)
         let lastFiveLocationURL = apiURL + "/limit/5"
         fetchLocationHistory(url: lastFiveLocationURL)
-        Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
+//        Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
     }
     
     @IBAction func getDateRangeLocations(_ sender: UIButton) {
@@ -89,7 +90,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
                 let dateRangeApiEndpoint = apiURL + "/date/" + startDateField.text! + "/" + endDateField.text!
 
                 fetchLocationHistory(url: dateRangeApiEndpoint)
-                Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
+//                Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
             }
         }
     }
@@ -239,6 +240,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
             }
         }
         stopAnimating()
+        Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
     }
 }
 
