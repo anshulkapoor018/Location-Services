@@ -8,9 +8,6 @@
 
 import Foundation
 import UIKit
-/*
- Custom UITEXTFIELD to disable copy, paste, delete and cut
- */
 
 class CardView: UIView {
     

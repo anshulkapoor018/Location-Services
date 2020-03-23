@@ -34,10 +34,13 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
     
     @IBOutlet weak var endDateField: disableUITextField!
     
+    /// Action Button to fetch Full Location History of User
     @IBAction func getLocationHistory(_ sender: Any) {
         fetchLocationHistory(url: apiURL)
     }
     
+    /// Action Button to Pop up UIActivityViewController
+    /// for Sharing the Current Location Link
     @IBAction func shareLocation(_ sender: UIButton) {
         if(currentLocationLong == "" || currentLocationLat == ""){
             Toast.short(message: "Please Press Get Location to fetch Current Location", success: "1", failer: "0")
@@ -51,19 +54,21 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
+    /// Action Button to fetch Current Location of the User
     @IBAction func getLocation(_ sender: UIButton) {
         self.getCurrentLocation()
 
         startAnimating(CGSize(width: 50, height: 30), message: "Loading...", type: NVActivityIndicatorType.ballSpinFadeLoader)
     }
     
+    /// Action Button to fetch Last 5 Locations from Users Location History
     @IBAction func getLast5(_ sender: UIButton) {
         startAnimating(CGSize(width: 50, height: 30), message: "Fetching...", type: NVActivityIndicatorType.ballSpinFadeLoader)
         let lastFiveLocationURL = apiURL + "/limit/5"
         fetchLocationHistory(url: lastFiveLocationURL)
-//        Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
     }
     
+    /// Action Button to fetch Filtered Location History by Date Range
     @IBAction func getDateRangeLocations(_ sender: UIButton) {
         if(startDateField.text! == "" && endDateField.text! != ""){
             Toast.short(message: "Please pick a start Date", success: "1", failer: "0")
@@ -90,7 +95,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
                 let dateRangeApiEndpoint = apiURL + "/date/" + startDateField.text! + "/" + endDateField.text!
 
                 fetchLocationHistory(url: dateRangeApiEndpoint)
-//                Toast.long(message: "Check the Location Dropdown for updated Location History result", success: "1", failer: "0")
             }
         }
     }
@@ -102,6 +106,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         fetchLocationHistory(url: apiURL)
         createPickerView()
         dismissPickerView()
+        
         // First Textfield
         let startDatePickerView = UIDatePicker()
         startDatePickerView.datePickerMode = .date
@@ -152,6 +157,12 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         view.endEditing(true)
     }
     
+    /// Helps in Locating Users Location on Google Map via the Geolocation Provided
+    /// via the Geolocation Provided
+    ///
+    /// - Parameters:
+    ///     - lat: Geolocation Latitude
+    ///     - long: Geolocation Longitude
     func locateMe(lat: Double, long: Double){
         self.googleMapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17)
@@ -178,6 +189,10 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
+    /// Returns the Timestamp in Human Readable Format
+    ///
+    /// - Parameters:
+    ///     - date: Timestamp of the JSON Object
     func convertDateToHumanReadable(date: String) -> String {
         if(date == "" || date.isEmpty || date == "None"){
             return ""
@@ -195,6 +210,11 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
+    /// Helps in Locating Users Location on Google Map via the Geolocation Provided
+    /// via the Geolocation Provided
+    ///
+    /// - Parameters:
+    ///     - index: Index of Location History Object Chosen
     func detailsAndCameraPositioning(index: Int){
         self.googleMapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: latList[index], longitude: longList[index], zoom: 17)
@@ -208,6 +228,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         googleMapView.selectedMarker = marker
     }
     
+    /// Helps in instantiating the CLLocationManager object to Fetch the users Location
     func getCurrentLocation() {
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -219,6 +240,10 @@ class LocationViewController: UIViewController, GMSMapViewDelegate, NVActivityIn
         }
     }
     
+    /// API Call function to Fetch Location History
+    ///
+    /// - Parameters:
+    ///     - url: api endpoint to fetch from
     func fetchLocationHistory(url: String){
         self.latList = []
         self.longList = []

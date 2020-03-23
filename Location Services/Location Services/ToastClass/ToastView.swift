@@ -2,8 +2,8 @@
 //  ToastView.swift
 //  Location Services
 //
-//  Created by visionias on 03/04/18.
-//  Copyright © 2018 visionias. All rights reserved.
+//  Created by Anshul Kapoor on 20/03/20.
+//  Copyright © 2020 Anshul Kapoor. All rights reserved.
 //
 
 import Foundation
