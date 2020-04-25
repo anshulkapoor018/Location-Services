@@ -1,26 +1,19 @@
 # Location-Services
 
-#### Implemented Option A of the Assessment
-
 Application is written in Swift.
 Backend Service is written in NodeJS hosted on Heroku with the Cloud Database Service mLAB for MongoDB
 
-Write an iOS or Android location services app that returns a location based on geolocation. - **Used CLLocationManager in Swift to Fetch Current geolocation coordinates of the Mobile**
+An iOS location services app that returns a location based on geolocation. - **Used CLLocationManager in Swift to Fetch Current geolocation coordinates of the Mobile**
 
-Record location in a NoSQL database such as Mongo. - **Each Get Location Tap makes a POST Request on the api to store the results in our cloud hosted Database in mLAB(MongoDB)**
+Screen to query location history - **A Dropdown menu on the home screen to check the location history(https://location-history-server.herokuapp.com/location), choosing the timestamp will location the marker instantly on the google map**
 
-Create a screen to query location history - **A Dropdown menu on the home screen to check the location history(https://location-history-server.herokuapp.com/location), choosing the timestamp will location the marker instantly on the google map**
-
-Write a Rest API that implements a micro service to return location history. - **API endpoint - https://location-history-server.herokuapp.com/location**
-
+Rest API that implements a micro service to return location history. - **API endpoint - https://location-history-server.herokuapp.com/location**
 
 The API must support at least two filters such as date range or last N locations - **API has two Different End point for applying the filter and fetch filtered results, Data Range(https://location-history-server.herokuapp.com/location/date/<start_date>/<end_date>) and Limit result to last 5 Locations visited(https://location-history-server.herokuapp.com/location/limit/5)**
 
+Location is mapped on a Google Map. Search is triggered by a button (Get Location). - **Google Maps SDK is used to Show the location chosen at all Times, User can Tap the Get Location Button to Fetch Current Location, which will simultaneously also added to Location History via API call.**
 
-Map location on a google map. Search is triggered by a button (Get Location). - **Google Maps SDK is used to Show the location chosen at all Times, User can Tap the Get Location Button to Fetch Current Location, which will simultaneously also added to Location History via API call.**
-
-
-Share location with your friends list - **Implemented using uiactivityviewcontroller, user can share current location to his friends via the social apps installed or even normal message**
+Location can be shared with your contacts on third party applications - **Implemented using uiactivityviewcontroller, user can share current location to his friends via the social apps installed or even normal message**
 
 
 | Main Screen  | Date Range | Share Location |
